@@ -1,0 +1,93 @@
+<style>
+    /* Importacion de Tipografia */
+    @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@600&family=Syne:wght@500&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background-image: url(https://opticabarreña.es/wp-content/uploads/2017/02/portada-1.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    /* Estilos encabezado */
+    .logo{
+        font-family: 'Syne', sans-serif;
+        font-weight: bold;
+        font-size: 30px;
+        display: flex;
+    }
+
+    nav{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 20px;
+        padding-left: 5%;
+        padding-right: 2%;
+    }
+
+    ul li{
+        font-size: 50px;
+        display: inline-block;
+    }
+
+    /* Diseño cuerpo */
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 70vh;
+    }
+
+    .text-principal {
+        font-size: 5rem;
+        color: #DCBC06;
+        text-align: center;
+        font-weight: bold;
+        font-family: 'Kanit', sans-serif;
+    }
+
+    .blog{
+        border-radius: 50%;
+        height: 50px;
+        width: 100px;
+    }
+
+</style>
+{% extends "base.html" %}
+
+<!-- load wagtailcore_tags by adding this: -->
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+<!-- replace everything below with: -->
+{% block content %}
+    <body>
+        <!-- Encabezado de la pagina -->
+        <header id="header">
+            <nav>
+                <div class="logo">
+                    <h1>BLOG</h1>
+                </div>
+                <ul>
+                    <li><i class='bx bxl-facebook-circle'></i></li>
+                    <li><i class='bx bxl-instagram-alt'></i></li>
+                    <li><i class='bx bxl-twitter'></i></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="text-principal">
+            {{ page.body|richtext }}
+
+            <a href="{% slugurl 'blog' %}"><button type="button" class="btn btn-info blog">Ir al Blog!</button></a>
+
+        </main> 
+    </body>
+{% endblock %}

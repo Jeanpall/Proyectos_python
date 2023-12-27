@@ -1,0 +1,190 @@
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ8NDQ0NFREWFhURFRUYHSggGBolGxUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDQ0NDg0NDisZFRkrKysrNystNysrNysrKysrKysrKystKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAOEA4QMBIgACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAAAAQT/xAAXEAEBAQEAAAAAAAAAAAAAAAAAAREC/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAIB/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A2AMSAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAFQAAAAAAAAACAAAAAAABAAAAInKgAAP/2Q==);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    /* Estilos encabezado */
+    .mask-custom {
+        backdrop-filter: blur(5px);
+        background-color: rgba(0, 0, 0, 0.627);
+    }
+
+    .navbar-brand {
+        font-size: 1.75rem;
+        letter-spacing: 3px;
+    }
+    .card{
+        margin-left: 550px;
+        margin-top: 100px;
+        margin-bottom: 100px;
+        height: 300px;
+        width: 400px;
+    }
+</style>
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top mask-custom shadow-0">
+            <div class="container">
+                <a class="navbar-brand" href="#!"><span style="color: #5e9693;">{{ page.title }}</span></a>
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class='bx bx-menu-alt-right' style='color:#ffffff'></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" style='color:#ffffff' href="{% slugurl 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style='color:#ffffff' href="#!">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style='color:#ffffff' href="#!">Portafolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style='color:#ffffff' href="#!">Contact</a>
+                    </li>
+                    </ul>
+                    <ul class="navbar-nav d-flex flex-row">
+                    <li class="nav-item me-3 me-lg-0">
+                        <a class="nav-link" style='color:#ffffff' href="#!">
+                            <i class='bx bxl-facebook'></i>
+                        </a>
+                    </li>
+                    <li class="nav-item me-3 me-lg-0">
+                        <a class="nav-link" style='color:#ffffff' href="#!">
+                            <i class='bx bxl-twitter'></i>
+                        </a>
+                    </li>
+                    <li class="nav-item me-3 me-lg-0">
+                        <a class="nav-link" style='color:#ffffff' href="#!">
+                            <i class='bx bxl-instagram-alt'></i>
+                        </a>
+                    </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="card">
+            {% if request.GET.tag %}
+            <h5 class="card-header">Showing pages tagged "{{ request.GET.tag }}"</h5>
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                {% for blogpage in blogpages %}
+                <p class="card-text">
+                    <strong><a href="{% pageurl blogpage %}">{{ blogpage.title }}</a></strong><br />
+                    <small>Revised: {{ blogpage.latest_revision_created_at }}</small><br />
+                </p>
+                {% empty %}
+                    No pages found with that tag.
+                {% endfor %}
+                {% comment %} <a href="{% slugurl 'blog/first-blog-post/' %}" class="btn btn-primary">Blog</a> {% endcomment %}
+            </div>
+        </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-center text-white">
+        <!-- Grid container -->
+        <div class="container p-4">
+            <!-- Section: Social media -->
+            <section class="mb-4">
+            <!-- Facebook -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <i class='bx bxl-facebook' style='color:#ffffff'  ></i>
+            </a>
+        
+            <!-- Twitter -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <i class='bx bxl-twitter' style='color:#ffffff' ></i>
+            </a>
+        
+            <!-- Google -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <i class='bx bxl-google' style='color:#ffffff' ></i>
+            </a>
+        
+            <!-- Instagram -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <i class='bx bxl-instagram' style='color:#ffffff' ></i>
+            </a>
+        
+            <!-- Linkedin -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <i class='bx bxl-linkedin' style='color:#ffffff' ></i>
+            </a>
+        
+            <!-- Github -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <i class='bx bxl-github' style='color:#ffffff' ></i>
+            </a>
+            </section>
+            <!-- Section: Social media -->
+        
+            <!-- Section: Form -->
+            <section class="">
+            <form action="">
+                <!--Grid row-->
+                <div class="row d-flex justify-content-center">
+                <!--Grid column-->
+                <div class="col-auto">
+                    <p class="pt-2">
+                    <strong>Sign up for our newsletter</strong>
+                    </p>
+                </div>
+                <!--Grid column-->
+        
+                <!--Grid column-->
+                <div class="col-md-5 col-12">
+                    <!-- Email input -->
+                    <div class="form-outline form-white mb-4">
+                    <input type="email" id="form5Example2" class="form-control" />
+                    <label class="form-label" for="form5Example2">Email address</label>
+                    </div>
+                </div>
+                <!--Grid column-->
+        
+                <!--Grid column-->
+                <div class="col-auto">
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-outline-light mb-4">
+                    Subscribe
+                    </button>
+                </div>
+                <!--Grid column-->
+                </div>
+                <!--Grid row-->
+            </form>
+            </section>
+            <!-- Section: Form -->
+        
+            <!-- Section: Text -->
+            <section class="mb-4">
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt distinctio earum
+                repellat quaerat voluptatibus placeat nam, commodi optio pariatur est quia magnam
+                eum harum corrupti dicta, aliquam sequi voluptate quas.
+            </p>
+            </section>
+        </div>
+        <!-- Grid container -->
+        
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2020 Copyright
+        </div>
+        <!-- Copyright -->
+        </footer>
+        <!-- Footer -->
+{% endblock %}
